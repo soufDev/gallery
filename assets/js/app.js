@@ -25,45 +25,48 @@ let initGallery = `
 document.querySelector('input[type="submit"]').addEventListener('click', (event) =>  {
     event.preventDefault()
     let pictureNumber = parseInt(document.getElementById('pictureNumber').value, 10)
-    console.log(document.getElementById('pictureNumber').value)
-    container.innerHTML = initGallery
-    for(let i=1; i<=pictureNumber ; i++) {
-        let div = document.createElement('div')
-        div.id = "pic"+i
+    if(!isNaN(pictureNumber)) {
+        console.log(document.getElementById('pictureNumber').value)
+        container.innerHTML = initGallery
+        for(let i=1; i<=pictureNumber ; i++) {
+            let div = document.createElement('div')
+            div.id = "pic"+i
 
-        let prev = document.createElement('a')
-        prev.className = 'previous'
-        prev.innerHTML = '&lt;'
-        if(i===1) {
-            prev.href = '#pic'+pictureNumber
-        }else {
-            prev.href = "#pic"+(i-1)
+            let prev = document.createElement('a')
+            prev.className = 'previous'
+            prev.innerHTML = '&lt;'
+            if(i===1) {
+                prev.href = '#pic'+pictureNumber
+            }else {
+                prev.href = "#pic"+(i-1)
 
+            }
+
+            let next = document.createElement('a')
+            next.className = 'next'
+            next.innerHTML = '&gt;'
+            if(i===pictureNumber) {
+                next.href = "#pic1"
+            }else {
+                next.href = "#pic"+(i+1)
+            }
+
+            let h3 = document.createElement('h3')
+            h3.innerHTML = i+'/'+pictureNumber
+
+            let pictureURl = "http://lorempixel.com/600/350/?"+i
+            let image = document.createElement('img')
+            image.id = "picture"+i
+            image.src = pictureURl
+            image.height = 350
+            image.width = 500
+            image.className = "onLoad"
+            div.appendChild(image)
+            div.appendChild(prev)
+            div.appendChild(next)
+            div.appendChild(h3)
+            document.getElementById("gallery").appendChild(div)
         }
-
-        let next = document.createElement('a')
-        next.className = 'next'
-        next.innerHTML = '&gt;'
-        if(i===pictureNumber) {
-            next.href = "#pic1"
-        }else {
-            next.href = "#pic"+(i+1)
-        }
-
-        let h3 = document.createElement('h3')
-        h3.innerHTML = i+'/'+pictureNumber
-
-        let pictureURl = "http://lorempixel.com/600/350/?"+i
-        let image = document.createElement('img')
-        image.id = "picture"+i
-        image.src = pictureURl
-        image.height = 350
-        image.width = 500
-        div.appendChild(image)
-        div.appendChild(prev)
-        div.appendChild(next)
-        div.appendChild(h3)
-        document.getElementById("gallery").appendChild(div)
     }
 
 })

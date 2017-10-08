@@ -76,3 +76,11 @@ a:hover {
 .round {
   border-radius: 50%;
 }
+
+.onLoad {
+  animation: fadein 2s;
+}
+@-o-keyframes fadein {
+  from { opacity: 0}
+  to   { opacity: 1}
+}
