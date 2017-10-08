@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea
+node_modules
+
+Supprimerait .idea/gallery.iml
+Supprimerait .idea/inspectionProfiles/
+Supprimerait .idea/modules.xml
+Supprimerait .idea/workspace.xml

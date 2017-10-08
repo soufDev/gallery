@@ -1,0 +1,78 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap-compass";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap-mincer";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+#pictureNumber {
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 300%;
+}
+#gallerywrapper {
+  width:640px;
+  height:450px;
+  margin:0 auto;
+  position:relative;
+  font-family:verdana, arial, sans-serif;
+}
+
+#gallerywrapper #gallery {
+  position:absolute;
+  left:0;
+  top:0;
+  height:450px;
+  width:640px;
+  overflow:hidden;
+  text-align:center;
+}
+
+#gallerywrapper #gallery div {
+  width:640px; height:900px;
+  padding-top:10px;
+  position:relative;
+}
+
+#gallerywrapper #gallery div img {
+  clear:both;
+  display:block;
+  margin:0 auto;
+  border:0;
+}
+
+#gallerywrapper #gallery div h3 {
+  padding:10px 0 0 0;
+  margin:0;
+  font-size:18px;
+}
+
+#gallerywrapper #gallery div p {
+  padding:5px 0;
+  margin:0;
+  font-size:12px;
+  line-height:18px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;
+}
