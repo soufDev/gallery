@@ -4,12 +4,12 @@
 * after that clone the project
         
     
-    git clone git@github.com:soufDev/gallery.git
+        git clone git@github.com:soufDev/gallery.git
 
 OR
         
 
-    git clone https://github.com/soufDev/gallery.git
+        git clone https://github.com/soufDev/gallery.git
 
 
 * enter in the repository
