@@ -1,6 +1,6 @@
 import '../css/app.scss'
-import {initPage} from './initPage'
-let initPage1 = `
+
+let initPage = `
     <h1 style="text-align: center">Enter Number of picture you want to display</h1>
     <div class="col-lg-4 col-md-6 col-xs-12 col-lg-offset-4 col-md-offset-3">
         <div class="form-group">
@@ -10,63 +10,84 @@ let initPage1 = `
     </div>    
 `
 
-let container = document.getElementById('container')
+let container = document.body
+container.innerHTML = initPage
+let index = 0
+let imageCount = 5
+let pictureURl = "http://lorempixel.com/600/350/?"
+let title
+let imageList = []
 
-container.innerHTML = initPage1
-
-let initGallery = `
-    <div id="gallerywrapper">
-        <div id="gallery">
-        
-        </div>    
-    </div>
-`
+let refresh = function(prev, next) {
+    let fadingOutImage = imageList[prev]
+    let fadingInImage = imageList[next]
+    console.log(prev, next)
+    fadingOutImage.className="fadeOut"
+    setTimeout(() => {
+        title.innerHTML = (index+1)+"/"+imageCount
+        fadingOutImage.style.display = "none"
+        fadingInImage.style.display = "block"
+        fadingInImage.className="fadeIn"
+    }, 600)
+}
 
 document.querySelector('input[type="submit"]').addEventListener('click', (event) =>  {
     event.preventDefault()
-    let pictureNumber = parseInt(document.getElementById('pictureNumber').value, 10)
-    if(!isNaN(pictureNumber)) {
-        console.log(document.getElementById('pictureNumber').value)
-        container.innerHTML = initGallery
-        for(let i=1; i<=pictureNumber ; i++) {
-            let div = document.createElement('div')
-            div.id = "pic"+i
 
-            let prev = document.createElement('a')
-            prev.className = 'previous'
-            prev.innerHTML = '&lt;'
-            if(i===1) {
-                prev.href = '#pic'+pictureNumber
-            }else {
-                prev.href = "#pic"+(i-1)
+    imageCount = parseInt(document.getElementById('pictureNumber').value, 10)
 
-            }
+    if(!isNaN(imageCount)) {
+        let galleryWrapper = document.createElement('div')
+        galleryWrapper.id = 'gallerywrapper'
 
-            let next = document.createElement('a')
-            next.className = 'next'
-            next.innerHTML = '&gt;'
-            if(i===pictureNumber) {
-                next.href = "#pic1"
-            }else {
-                next.href = "#pic"+(i+1)
-            }
+        let gallery = document.createElement('div')
+        gallery.id = 'gallery'
 
-            let h3 = document.createElement('h3')
-            h3.innerHTML = i+'/'+pictureNumber
+        galleryWrapper.appendChild(gallery)
+        container.innerHTML = galleryWrapper.outerHTML
 
-            let pictureURl = "http://lorempixel.com/600/350/?"+i
+        let div = document.getElementById("gallery")
+
+        let prev = document.createElement('button')
+        prev.className = 'previous'
+        prev.innerHTML = 'Prev'
+        prev.addEventListener('click', (event) => {
+            event.preventDefault()
+            let old = index
+            index = (index-1+imageCount) % imageCount
+            refresh(old, index)
+        })
+
+
+        let next = document.createElement('button')
+        next.className = 'next'
+        next.innerHTML = 'Next'
+        next.addEventListener('click', (event) =>  {
+            event.preventDefault()
+            let old = index
+            index = (++index) % imageCount
+            refresh(old, index)
+        })
+
+        title = document.createElement('h3')
+
+        let preview = document.createElement('div')
+        preview.id= "preview"
+        for(let i=1; i<=imageCount; i++) {
             let image = document.createElement('img')
-            image.id = "picture"+i
-            image.src = pictureURl
-            image.height = 350
-            image.width = 500
-            image.className = "onLoad"
-            div.appendChild(image)
-            div.appendChild(prev)
-            div.appendChild(next)
-            div.appendChild(h3)
-            document.getElementById("gallery").appendChild(div)
+            image.id = i
+            image.src = pictureURl+i
+            image.className = 'fadeOut'
+            image.style.display = 'none'
+            imageList.push(image)
+            preview.appendChild(image)
         }
+        div.appendChild(preview)
+        div.appendChild(prev)
+        div.appendChild(next)
+        div.appendChild(title)
+
+        refresh(0,0)
     }
 
 })
